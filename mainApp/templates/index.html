@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <h1>
+        hi
+    </h1>
+
+
+    <form action="/" method="post" >
+        {% csrf_token %}
+        <div class="spinner-border text-primary" id="loader" style="display: none;" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          
+        <input type="text" id="this_id_important" value="">
+
+        <button type="button">Save</button>
+
+    </form>
+
+
+    <script>
+        $(document).ready(function(){
+
+            // we need catch our input changed event
+            $(document).on('change','#this_id_important',function(){
+                //we have the value now $('#this_id_important').val()
+                //alert($('#this_id_important').val());
+
+                $('#loader').show();
+                title = $('#this_id_important').val();
+                // now lets do our ajax requests here
+                // we need server side code to answer this load
+
+                $.get('http://localhost:8000/check_req/'+title, function(data){
+                    alert(data);
+                    $('#loader').hide();
+                });
+
+
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>
